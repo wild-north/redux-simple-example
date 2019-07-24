@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react';
-import { AppRouter } from 'routes';
-import { appConnector } from './connector';
-import { userGuard } from 'services/user-guard';
+import React from 'react';
+import { store } from './store';
 
-const Application = ({ fetchCurrentUser, currentUserRoles, currentUserId }) => {
-    useEffect(() => {
-        fetchCurrentUser();
-    }, [fetchCurrentUser]);
-    useEffect(() => {
-        userGuard(currentUserRoles, currentUserId);
-    },[currentUserRoles, currentUserId]);
+window.store = store;
 
-    return (
-        <div className="app">
-            <AppRouter/>
-        </div>
-    );
-};
+console.log('initial state', store.getState());
 
-export const App = appConnector(Application);
+store.subscribe(function () {
+    console.log(store.getState());
+    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+});
+
+export const App = () => (
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda at autem cumque debitis distinctio eligendi enim fugiat illum ipsa, ipsam itaque maiores natus optio provident quia, rerum ullam velit?
+    </div>
+);
